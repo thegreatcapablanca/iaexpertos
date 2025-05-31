@@ -8,33 +8,45 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(90deg, #ff6b6b 0%, #ffa500 100%);
+            --text-gradient: linear-gradient(45deg, #FFD700, #FF69B4, #87CEFA);
+        }
+        
         body {
             font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--primary-gradient);
             color: #ffffff;
             line-height: 1.8;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Previene scroll horizontal indeseado */
         }
+        
         h1, h2, h3, h4 {
             font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
         }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding-left: 1rem;
             padding-right: 1rem;
         }
+        
         @media (min-width: 640px) {
             .container {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
             }
         }
+        
         .header-bg {
             background-color: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         }
+        
         .card {
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
@@ -42,206 +54,285 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
         .card:hover {
             transform: translateY(-6px);
             box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
         }
+        
         .btn-primary {
-            background: linear-gradient(90deg, #ff6b6b 0%, #ffa500 100%);
+            background: var(--secondary-gradient);
             transition: all 0.3s ease;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
+        
         .btn-primary:hover {
             background: linear-gradient(90deg, #ffa500 0%, #ff6b6b 100%);
             transform: translateY(-2px);
             box-shadow: 0 8px 22px rgba(255, 165, 0, 0.6);
         }
+        
         .text-gradient {
-            background: linear-gradient(45deg, #FFD700, #FF69B4, #87CEFA);
+            background: var(--text-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
         .fade-in {
             opacity: 0;
             animation: fadeIn 1s ease-out forwards;
             animation-delay: 0.2s;
         }
+        
         @keyframes fadeIn {
             to {
                 opacity: 1;
             }
         }
-        .section-image {
+        
+        .full-cover-section {
+            position: relative;
+            min-height: 500px; /* Asegura altura mínima para que la imagen de fondo sea visible */
+            display: flex;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto parallax */
+        }
+        
+        .full-cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0, 0, 30, 0.7), rgba(0, 0, 30, 0.5));
+            z-index: 1;
+        }
+        
+        .full-cover-content {
+            position: relative;
+            z-index: 2;
             width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 0.75rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .section-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-        }
+        
         .service-image {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 0.75rem 0.75rem 0 0;
+            height: 250px; /* Altura fija para consistencia en tarjetas */
+            object-fit: cover; /* Asegura que la imagen cubra sin distorsión */
+            border-radius: 0.75rem 0.75rem 0 0; /* Redondeo solo superior */
             transition: transform 0.3s ease;
         }
+        /* Hover effect for service images if desired, e.g., zoom */
+        .card:hover .service-image {
+            /* transform: scale(1.05); */ /* Ejemplo de efecto al hacer hover sobre la tarjeta */
+        }
+
         .circular-image {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            object-fit: cover;
+            object-fit: cover; /* Clave para imágenes circulares */
             border: 3px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease;
         }
-        @media (min-width: 768px) {
-            .circular-image {
-                width: 120px;
-                height: 120px;
-            }
-        }
+        
         .circular-image:hover {
             transform: scale(1.08);
         }
+        
         .footer-bg {
             background-color: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(8px);
         }
-        .form-input {
+        
+        /* FormSubmit Styles - Ya bien definidos */
+        .form-control {
             background-color: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
             transition: all 0.3s ease;
             border-radius: 0.5rem;
+            padding: 12px 16px;
+            width: 100%;
+            margin-bottom: 15px; /* Espacio entre campos */
         }
-        .form-input::placeholder {
+        
+        .form-control::placeholder {
             color: rgba(255, 255, 255, 0.5);
         }
-        .form-input:focus {
+        
+        .form-control:focus {
             background-color: rgba(255, 255, 255, 0.15);
-            border-color: #FFD700;
-            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.25);
+            border-color: #FFD700; /* Un color de acento de la paleta */
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.25); /* Sutil resplandor al enfocar */
             outline: none;
         }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px; /* Espacio si hay otra fila debajo */
+        }
+        
+        .col {
+            flex: 1;
+        }
+        
+        .btn { /* Estilo base para botones */
+            padding: 12px 24px;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-lg { /* Botón más grande */
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+        
+        .btn-dark { /* Tu botón de envío del formulario */
+            background: var(--secondary-gradient);
+            color: white;
+        }
+        
+        .btn-dark:hover {
+            /* Hereda el hover de btn-primary, podemos especificar uno si es diferente */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(255, 165, 0, 0.6); /* Coincide con btn-primary hover */
+        }
+        
+        .btn-block {
+            width: 100%;
+            display: block;
+        }
+        
         .feature-card {
-            height: 100%;
+            height: 100%; /* Para que todas las tarjetas en una fila tengan la misma altura */
             display: flex;
             flex-direction: column;
         }
+        
         .feature-card-content {
-            flex-grow: 1;
+            flex-grow: 1; /* Empuja el contenido hacia abajo si es necesario */
             display: flex;
             flex-direction: column;
         }
-        /* Nuevos estilos para la sección hero */
+         /* Asegura que el enlace "Más información" esté al final si las tarjetas tienen alturas variables */
+        .feature-card-content a {
+            margin-top: auto; 
+        }
+        
         .hero-section {
             position: relative;
-            min-height: 100vh;
+            min-height: 80vh; /* Buena altura para la sección hero */
             overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-        .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Ensure the image covers the entire section */
-        }
+        
         .hero-overlay {
             position: absolute;
             inset: 0;
-            /* Adjusted opacity for better background visibility */
             background: linear-gradient(to right, rgba(0, 0, 30, 0.6), rgba(0, 0, 30, 0.3));
             z-index: 1;
         }
-        /* Animación de partículas para la sección hero */
+        
         .particles {
             position: absolute;
             width: 100%;
             height: 100%;
-            z-index: 2;
-            pointer-events: none;
+            z-index: 2; /* Encima del overlay, debajo del contenido */
+            pointer-events: none; /* Para no interferir con clicks */
         }
+        
         .particle {
             position: absolute;
             background-color: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             animation: float 8s infinite ease-in-out;
         }
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-            }
-            25% {
-                transform: translateY(-20px) translateX(10px);
-            }
-            50% {
-                transform: translateY(-10px) translateX(20px);
-            }
-            75% {
-                transform: translateY(20px) translateX(-10px);
-            }
+        
+        @keyframes float { /* Animación de partículas ya definida */
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-10px) translateX(20px); }
+            75% { transform: translateY(20px) translateX(-10px); }
         }
-        /* Efecto de pulso para el botón CTA */
-        .pulse-btn {
-            animation: pulse 2s infinite;
+        
+        .ai-logo { /* Estilos del logo ya bien definidos */
+            width: 60px; height: 60px; position: relative; display: flex;
+            align-items: center; justify-content: center; border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); overflow: hidden;
         }
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 165, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
-            }
+        
+        .ai-logo-inner { /* Estilos del logo ya bien definidos */
+            position: relative; width: 80%; height: 80%; display: flex;
+            align-items: center; justify-content: center; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);
         }
-        /* Logo mejorado */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            /* Prevents logo from shrinking on smaller screens */
-            flex-shrink: 0;
+        
+        .ai-logo-icon { /* Estilos del logo ya bien definidos */
+            font-size: 24px; font-weight: bold; color: white;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
-        .logo-img {
-            /* Increased height for more prominence */
-            height: 50px;
-            width: auto;
-            /* Ensures the image fits well within its bounds */
-            object-fit: contain;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
-            transition: all 0.3s ease;
-            /* Added padding for better framing */
-            padding: 5px;
-            background-color: rgba(255, 255, 255, 0.1); /* Subtle background for the logo image */
-        }
-        .logo-img:hover {
-            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));
-            transform: scale(1.05);
-        }
-        .logo-text {
-            margin-left: 12px;
-            font-weight: 800;
+        
+        .logo-text { /* Estilos del texto del logo ya bien definidos */
+            margin-left: 12px; font-weight: 800;
             background: linear-gradient(135deg, #7eeafd 0%, #4ea8f3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        
+        .stat-number { /* Estilos de números de estadísticas ya bien definidos */
+            font-size: 3rem; font-weight: 800; background: var(--text-gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        
+        .testimonial-card { /* Estilos de tarjetas de testimonios ya bien definidos */
+            position: relative; overflow: hidden;
+        }
+        
+        .testimonial-card::before { /* Pseudo-elemento para fondo de tarjeta de testimonio */
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+            z-index: -1; /* Detrás del contenido */
+        }
+        
+        @media (max-width: 768px) { /* Ajustes responsivos ya definidos */
+            .hero-title { font-size: 2.5rem; }
+            .stat-number { font-size: 2rem; }
+            .form-row { flex-direction: column; gap: 0; /* Los inputs se apilan */ }
+            .full-cover-section, .hero-section { background-attachment: scroll; /* Mejora rendimiento en móviles */ }
+        }
+        
+        /* Custom scrollbar - Ya bien definido */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
+        
+        /* PDF Optimization - Ya bien definido */
+        @media print {
+            .hero-section, .full-cover-section { background-attachment: scroll !important; }
+            .fade-in { opacity: 1 !important; animation: none !important; }
+            .card:hover { transform: none !important; }
         }
     </style>
 </head>
 <body class="antialiased">
     <header class="header-bg py-3 sm:py-4 sticky top-0 z-50 rounded-b-lg shadow-lg">
         <div class="container flex justify-between items-center">
-            <a href="#" class="logo-container">
-                <img src="https://placehold.co/100x100/A020F0/FFFFFF?text=AI" alt="Logo IAExpertos.org" class="logo-img rounded-md">
+            <a href="#" class="flex items-center">
+                <div class="ai-logo">
+                    <div class="ai-logo-inner">
+                        <div class="ai-logo-icon">AI</div>
+                    </div>
+                </div>
                 <span class="text-2xl sm:text-3xl logo-text hidden md:block tracking-wide">IAExpertos.org</span>
             </a>
             <nav class="flex space-x-2 sm:space-x-3 md:space-x-6">
@@ -250,6 +341,9 @@
                 </a>
                 <a href="#servicios" class="text-sm sm:text-base text-white hover:text-yellow-300 transition duration-300 ease-in-out font-semibold px-1 sm:px-2">
                     <i class="fas fa-cogs mr-1"></i> Servicios
+                </a>
+                <a href="#clientes" class="text-sm sm:text-base text-white hover:text-yellow-300 transition duration-300 ease-in-out font-semibold px-1 sm:px-2">
+                    <i class="fas fa-star mr-1"></i> Clientes
                 </a>
                 <a href="#contacto" class="text-sm sm:text-base text-white hover:text-yellow-300 transition duration-300 ease-in-out font-semibold px-1 sm:px-2">
                     <i class="fas fa-envelope mr-1"></i> Contacto
@@ -260,28 +354,32 @@
 
     <main>
         <section class="hero-section flex items-center justify-center py-20 text-center p-4 sm:p-6">
-            <img src="https://images.unsplash.com/photo-1579547621879-e1378875323a?q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=1080&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="hero-bg">
             <div class="hero-overlay"></div>
-            
             <div class="particles" id="particles"></div>
-            
             <div class="relative z-10 max-w-4xl mx-auto fade-in">
                 <div class="mb-8 flex justify-center">
                     <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-blue-500 bg-opacity-30 flex items-center justify-center p-2 animate-pulse">
-                        <img src="https://placehold.co/100x100/A020F0/FFFFFF?text=AI" alt="IA Logo" class="w-full h-full object-cover rounded-full">
+                        <div class="ai-logo" style="width: 100%; height: 100%;">
+                            <div class="ai-logo-inner">
+                                <div class="ai-logo-icon" style="font-size: 2.5rem;">AI</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
                 <h1 class="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 sm:mb-8 text-gradient drop-shadow-xl">
                     Soluciones IA para Potenciar tu Empresa
                 </h1>
                 <p class="text-base xs:text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-10 text-white text-opacity-90 leading-relaxed max-w-3xl mx-auto">
                     Desbloquea el futuro de tu negocio con inteligencia artificial de vanguardia. En IAExpertos.org, somos tu equipo de especialistas en IA, dedicados a ofrecerte soluciones personalizadas que marcan la diferencia.
                 </p>
-                <a href="#contacto" class="btn-primary pulse-btn inline-block py-3 px-6 sm:py-4 sm:px-10 rounded-full font-bold text-base sm:text-lg md:text-xl shadow-xl uppercase tracking-wider">
-                    <i class="fas fa-rocket mr-2"></i> ¿Listo para innovar? Hablemos
-                </a>
-                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#contacto" class="btn-primary inline-block py-3 px-6 sm:py-4 sm:px-10 rounded-full font-bold text-base sm:text-lg md:text-xl shadow-xl uppercase tracking-wider">
+                        <i class="fas fa-rocket mr-2"></i> ¿Listo para innovar?
+                    </a>
+                    <a href="#servicios" class="bg-white bg-opacity-10 hover:bg-opacity-20 inline-block py-3 px-6 sm:py-4 sm:px-10 rounded-full font-bold text-base sm:text-lg md:text-xl shadow-xl uppercase tracking-wider transition-all duration-300">
+                        <i class="fas fa-search mr-2"></i> Explorar servicios
+                    </a>
+                </div>
                 <div class="mt-10 pt-6 flex flex-wrap justify-center gap-4">
                     <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-md rounded-full px-4 py-2 flex items-center">
                         <i class="fas fa-shield-alt text-yellow-300 mr-2"></i>
@@ -299,77 +397,166 @@
             </div>
         </section>
 
-        <section id="soluciones" class="py-12 md:py-20 px-4 sm:px-6 bg-gradient-to-r from-purple-800 via-indigo-800 to-purple-900 fade-in">
-            <div class="container text-center">
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-gradient drop-shadow-lg">¿Tu Empresa Preparada para la Revolución IA?</h2>
-                <img src="https://gooapps.es/wp-content/uploads/2024/08/aplicaciones-de-la-inteligencia-artificial-en-empresas-01.jpg" alt="Aplicaciones de la inteligencia artificial en empresas" class="section-image">
-                <div class="grid md:grid-cols-2 gap-8 md:gap-12 mt-8 sm:mt-12">
-                    <div class="card p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl flex flex-col items-center">
-                        <img src="https://www.esic.edu/sites/default/files/2024-04/inteligencia%20artificial%20marketing%20%282%29.jpeg" alt="Inteligencia artificial en marketing" class="circular-image mb-5 sm:mb-6 md:mb-8">
-                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-3 sm:mb-4 md:mb-5 text-white">Transformamos Desafíos en Soluciones Innovadoras</h3>
-                        <p class="text-sm sm:text-base md:text-lg text-gray-100 mb-4 sm:mb-6 leading-relaxed">
-                            En IAExpertos.org, convertimos retos en soluciones pioneras con IA avanzada. Descubre cómo nuestros servicios personalizados impulsan tu crecimiento, optimizan operaciones y abren nuevas oportunidades.
-                        </p>
-                        <p class="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed">
-                            Explora nuestro potencial y eleva tu negocio al siguiente nivel.
-                        </p>
+        <section class="py-12 md:py-16 px-4 sm:px-6 bg-black bg-opacity-30 fade-in">
+            <div class="container">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="card p-6 rounded-xl">
+                        <div class="stat-number mb-2" id="clientCounter">150</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-300">Clientes satisfechos</div>
                     </div>
-                    <div class="card p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl flex flex-col items-center">
-                        <img src="https://inforges.es/wp-content/uploads/2023/01/inteligencia-artificial-para-empresas.jpg" alt="Inteligencia Artificial para empresas" class="circular-image mb-5 sm:mb-6 md:mb-8">
-                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-3 sm:mb-4 md:mb-5 text-white">IA para tu Éxito Empresarial. Expertos a tu Alcance.</h3>
-                        <p class="text-sm sm:text-base md:text-lg text-gray-100 mb-4 sm:mb-6 leading-relaxed">
-                            Te proporcionamos las soluciones de inteligencia artificial que tu negocio necesita para prosperar. Conócenos y transforma tu futuro con IAExpertos.org.
-                        </p>
-                        <p class="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed">
-                            ¿Y si la IA pudiera llevar tu empresa más lejos de lo que imaginas? Nosotros hacemos esa visión realidad.
-                        </p>
+                    <div class="card p-6 rounded-xl">
+                        <div class="stat-number mb-2" id="projectCounter">320</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-300">Proyectos completados</div>
+                    </div>
+                    <div class="card p-6 rounded-xl">
+                        <div class="stat-number mb-2" id="aiCounter">85</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-300">Soluciones IA</div>
+                    </div>
+                    <div class="card p-6 rounded-xl">
+                        <div class="stat-number mb-2" id="teamCounter">25</div>
+                        <div class="text-sm uppercase tracking-wider text-gray-300">Expertos en equipo</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="servicios" class="py-12 md:py-20 px-4 sm:px-6 fade-in">
-            <div class="container text-center">
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-gradient drop-shadow-lg">Nuestros Servicios Integrales</h2>
-                <img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147488964/images/cc7284-582d-b44-b8d2-455debfe086_95a2bbcd-0f99-420d-b93c-d8771cef53ac.webp" alt="Inteligencia artificial empresarial" class="section-image">
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 mt-8 sm:mt-12">
-                    <div class="card rounded-2xl shadow-xl overflow-hidden feature-card">
-                        <img src="https://www.pinchaaqui.es/app/uploads/2024/11/consultoria-ia-para-empresas.jpeg" alt="Consultoría IA para empresas" class="service-image">
-                        <div class="p-6 md:p-8 feature-card-content">
-                            <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 text-white">Estrategia e Implementación</h3>
-                            <p class="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base">
-                                Desde la concepción estratégica hasta la implementación completa, te guiamos en cada paso para integrar soluciones de IA personalizadas a tu negocio.
+        <section id="soluciones" class="full-cover-section py-12 md:py-20 px-4 sm:px-6 fade-in" style="background-image: url('https://images.unsplash.com/photo-1677442135136-760c813a743f?q=80&w=1920&auto=format&fit=crop');">
+            <div class="full-cover-overlay"></div>
+            <div class="full-cover-content">
+                <div class="container text-center">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-gradient drop-shadow-lg">¿Tu Empresa Preparada para la Revolución IA?</h2>
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 mt-8 sm:mt-12">
+                        <div class="card p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl flex flex-col items-center">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1920&auto=format&fit=crop" alt="Inteligencia artificial en marketing" class="circular-image mb-5 sm:mb-6 md:mb-8">
+                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-3 sm:mb-4 md:mb-5 text-white">Transformamos Desafíos en Soluciones Innovadoras</h3>
+                            <p class="text-sm sm:text-base md:text-lg text-gray-100 mb-4 sm:mb-6 leading-relaxed">
+                                En IAExpertos.org, convertimos retos en soluciones pioneras con IA avanzada. Descubre cómo nuestros servicios personalizados impulsan tu crecimiento, optimizan operaciones y abren nuevas oportunidades.
                             </p>
-                            <a href="#contacto" class="mt-4 text-yellow-300 hover:text-yellow-400 transition-colors inline-block">
-                                <span>Más información</span>
-                                <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
+                            <p class="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed">
+                                Explora nuestro potencial y eleva tu negocio al siguiente nivel.
+                            </p>
+                        </div>
+                        <div class="card p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl flex flex-col items-center">
+                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1920&auto=format&fit=crop" alt="Inteligencia Artificial para empresas" class="circular-image mb-5 sm:mb-6 md:mb-8">
+                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-3 sm:mb-4 md:mb-5 text-white">IA para tu Éxito Empresarial. Expertos a tu Alcance.</h3>
+                            <p class="text-sm sm:text-base md:text-lg text-gray-100 mb-4 sm:mb-6 leading-relaxed">
+                                Te proporcionamos las soluciones de inteligencia artificial que tu negocio necesita para prosperar. Conócenos y transforma tu futuro con IAExpertos.org.
+                            </p>
+                            <p class="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed">
+                                ¿Y si la IA pudiera llevar tu empresa más lejos de lo que imaginas? Nosotros hacemos esa visión realidad.
+                            </p>
                         </div>
                     </div>
-                    <div class="card rounded-2xl shadow-xl overflow-hidden feature-card">
-                        <img src="https://community.es/wp-content/uploads/IA-in-company.jpg" alt="Inteligencia artificial para equipos" class="service-image">
-                        <div class="p-6 md:p-8 feature-card-content">
-                            <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 text-white">Formación y Capacitación</h3>
-                            <p class="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base">
-                                Capacitamos a tu equipo con cursos diseñados para empoderar a tu organización desde dentro y maximizar el potencial de las tecnologías IA.
-                            </p>
-                            <a href="#contacto" class="mt-4 text-yellow-300 hover:text-yellow-400 transition-colors inline-block">
-                                <span>Más información</span>
-                                <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="full-cover-section py-12 md:py-20 px-4 sm:px-6 fade-in" style="background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1920&auto=format&fit=crop');">
+            <div class="full-cover-overlay"></div>
+            <div class="full-cover-content">
+                <div class="container text-center">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-gradient drop-shadow-lg">Nuestros Servicios Integrales</h2>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 mt-8 sm:mt-12">
+                        <div class="card rounded-2xl shadow-xl overflow-hidden feature-card">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1920&auto=format&fit=crop" alt="Consultoría IA para empresas" class="service-image">
+                            <div class="p-6 md:p-8 feature-card-content">
+                                <div class="flex justify-center mb-4">
+                                    <div class="w-16 h-16 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-chess-queen text-2xl text-purple-300"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 text-white">Estrategia e Implementación</h3>
+                                <p class="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base">
+                                    Desde la concepción estratégica hasta la implementación completa, te guiamos en cada paso para integrar soluciones de IA personalizadas a tu negocio.
+                                </p>
+                                <a href="#contacto" class="mt-4 text-yellow-300 hover:text-yellow-400 transition-colors inline-block">
+                                    <span>Más información</span>
+                                    <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card rounded-2xl shadow-xl overflow-hidden feature-card">
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1920&auto=format&fit=crop" alt="Inteligencia artificial para equipos" class="service-image">
+                            <div class="p-6 md:p-8 feature-card-content">
+                                <div class="flex justify-center mb-4">
+                                    <div class="w-16 h-16 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-graduation-cap text-2xl text-blue-300"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 text-white">Formación y Capacitación</h3>
+                                <p class="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base">
+                                    Capacitamos a tu equipo con cursos diseñados para empoderar a tu organización desde dentro y maximizar el potencial de las tecnologías IA.
+                                </p>
+                                <a href="#contacto" class="mt-4 text-yellow-300 hover:text-yellow-400 transition-colors inline-block">
+                                    <span>Más información</span>
+                                    <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card rounded-2xl shadow-xl overflow-hidden feature-card">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1920&auto=format&fit=crop" alt="Soporte técnico profesional" class="service-image">
+                            <div class="p-6 md:p-8 feature-card-content">
+                                <div class="flex justify-center mb-4">
+                                    <div class="w-16 h-16 rounded-full bg-green-500 bg-opacity-20 flex items-center justify-center">
+                                        <i class="fas fa-headset text-2xl text-green-300"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 text-white">Soporte y Asistencia</h3>
+                                <p class="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base">
+                                    Te acompañamos con soporte técnico continuo y asistencia personalizada para asegurar tu éxito en la implementación de soluciones basadas en IA.
+                                </p>
+                                <a href="#contacto" class="mt-4 text-yellow-300 hover:text-yellow-400 transition-colors inline-block">
+                                    <span>Más información</span>
+                                    <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="card rounded-2xl shadow-xl overflow-hidden feature-card sm:col-span-2 lg:col-span-1">
-                        <img src="https://www.rberny.com/wp-content/uploads/2023/04/20220710154827_genetec_7_jul_22.jpg" alt="Soporte técnico profesional" class="service-image">
-                        <div class="p-6 md:p-8 feature-card-content">
-                            <h3 class="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3 md:mb-4 text-white">Soporte y Asistencia</h3>
-                            <p class="text-gray-200 leading-relaxed text-xs sm:text-sm md:text-base">
-                                Te acompañamos con soporte técnico continuo y asistencia personalizada para asegurar tu éxito en la implementación de soluciones basadas en IA.
-                            </p>
-                            <a href="#contacto" class="mt-4 text-yellow-300 hover:text-yellow-400 transition-colors inline-block">
-                                <span>Más información</span>
-                                <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="clientes" class="py-12 md:py-20 px-4 sm:px-6 bg-gradient-to-l from-purple-800 via-indigo-800 to-purple-900 fade-in">
+            <div class="container">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-center text-gradient drop-shadow-lg">Lo que dicen nuestros clientes</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card p-6 rounded-xl testimonial-card">
+                        <div class="flex items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Cliente satisfecho María García" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">María García</h4>
+                                <p class="text-sm text-gray-300">CEO, TechSolutions</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 italic">"IAExpertos transformó completamente nuestra forma de trabajar. Sus soluciones de IA nos permitieron automatizar procesos y aumentar nuestra productividad en un 40%."</p>
+                        <div class="mt-4 flex">
+                            <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="card p-6 rounded-xl testimonial-card">
+                        <div class="flex items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Cliente satisfecho Carlos Martínez" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Carlos Martínez</h4>
+                                <p class="text-sm text-gray-300">Director, Innovatech</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 italic">"El equipo de IAExpertos es excepcional. Entendieron nuestras necesidades y desarrollaron una solución personalizada que superó todas nuestras expectativas."</p>
+                        <div class="mt-4 flex">
+                            <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+                        </div>
+                    </div>
+                    <div class="card p-6 rounded-xl testimonial-card">
+                        <div class="flex items-center mb-4">
+                             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente satisfecho Laura Fernández" class="w-12 h-12 rounded-full mr-4 object-cover">
+                            <div>
+                                <h4 class="font-bold text-white">Laura Fernández</h4>
+                                <p class="text-sm text-gray-300">Directora de Marketing, DigitalPlus</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-200 italic">"Gracias a las soluciones de IAExpertos, hemos podido ofrecer experiencias personalizadas a nuestros clientes, lo que ha incrementado nuestra tasa de conversión en un 35%."</p>
+                        <div class="mt-4 flex">
+                            <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star-half-alt text-yellow-400"></i>
                         </div>
                     </div>
                 </div>
@@ -381,27 +568,15 @@
                 <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient drop-shadow-lg">¿Listo para Liderar la Revolución IA?</h2>
                 <div class="grid md:grid-cols-2 gap-8 items-center mb-12">
                     <div>
-                        <img src="https://framerusercontent.com/images/LBZbPx7rXyGfimxxA9bN4dIiM.jpg" alt="Ventajas de la Inteligencia Artificial" class="rounded-lg shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1920&auto=format&fit=crop" alt="Ventajas de la Inteligencia Artificial para negocios" class="rounded-lg shadow-lg w-full h-64 object-cover">
                     </div>
                     <div class="text-left">
                         <h3 class="text-2xl font-semibold mb-4">Beneficios de nuestras soluciones</h3>
                         <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Transformamos desafíos complejos en oportunidades de negocio</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Optimizamos procesos para mejorar la eficiencia operativa</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Impulsamos el crecimiento y la competitividad de tu empresa</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Desbloqueamos nuevos horizontes con la innovación tecnológica</span>
-                            </li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i><span>Transformamos desafíos complejos en oportunidades de negocio</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i><span>Optimizamos procesos para mejorar la eficiencia operativa</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i><span>Impulsamos el crecimiento y la competitividad de tu empresa</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i><span>Desbloqueamos nuevos horizontes con la innovación tecnológica</span></li>
                         </ul>
                     </div>
                 </div>
@@ -416,37 +591,19 @@
                 <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12 text-gradient drop-shadow-lg">Ponte en Contacto</h2>
                 <div class="grid md:grid-cols-2 gap-10 items-center">
                     <div>
-                        <img src="https://grupoinmotion.com/wp-content/uploads/2020/12/inteligencia-artificial.jpg" alt="Contacto para servicios de inteligencia artificial" class="rounded-lg shadow-2xl mb-6">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1920&auto=format&fit=crop" alt="Formulario de contacto para servicios de inteligencia artificial" class="rounded-lg shadow-2xl mb-6 w-full h-64 object-cover">
                         <div class="text-left bg-opacity-20 bg-white p-6 rounded-lg">
                             <h3 class="text-xl font-semibold mb-4">Información de contacto</h3>
                             <div class="space-y-3">
-                                <p class="flex items-center">
-                                    <i class="fas fa-envelope w-6 text-yellow-300"></i>
-                                    <span>info@iaexpertos.org</span>
-                                </p>
-                                <p class="flex items-center">
-                                    <i class="fas fa-phone w-6 text-yellow-300"></i>
-                                    <span>+34 668626500</span>
-                                </p>
-                                <p class="flex items-center">
-                                    <i class="fas fa-map-marker-alt w-6 text-yellow-300"></i>
-                                    <span>Calle José Tamayo, 8 - 18008 Granada</span>
-                                </p>
-                                <p class="flex items-center">
-                                    <i class="fas fa-clock w-6 text-yellow-300"></i>
-                                    <span>Lunes a Viernes: 9:00 - 18:00</span>
-                                </p>
+                                <p class="flex items-center"><i class="fas fa-envelope w-6 text-yellow-300 mr-2"></i><span>info@iaexpertos.org</span></p>
+                                <p class="flex items-center"><i class="fas fa-phone w-6 text-yellow-300 mr-2"></i><span>+34 668626500</span></p>
+                                <p class="flex items-center"><i class="fas fa-map-marker-alt w-6 text-yellow-300 mr-2"></i><span>Calle José Tamayo, 8 - 18008 Granada</span></p>
+                                <p class="flex items-center"><i class="fas fa-clock w-6 text-yellow-300 mr-2"></i><span>Lunes a Viernes: 9:00 - 18:00</span></p>
                             </div>
                             <div class="flex space-x-4 mt-6">
-                                <a href="https://www.linkedin.com/in/iaexpertos-org-066074369" class="text-white hover:text-yellow-300 transition-colors" target="_blank" rel="noopener">
-                                    <i class="fab fa-linkedin fa-2x"></i>
-                                </a>
-                                <a href="https://twitter.com/iaexpertos" class="text-white hover:text-yellow-300 transition-colors" target="_blank" rel="noopener">
-                                    <i class="fab fa-twitter fa-2x"></i>
-                                </a>
-                                <a href="https://www.facebook.com/people/IAExpertos/61576674341650/" class="text-white hover:text-yellow-300 transition-colors" target="_blank" rel="noopener">
-                                    <i class="fab fa-facebook fa-2x"></i>
-                                </a>
+                                <a href="https://www.linkedin.com/in/iaexpertos-org-066074369" class="text-white hover:text-yellow-300 transition-colors" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin fa-2x"></i></a>
+                                <a href="https://twitter.com/iaexpertos" class="text-white hover:text-yellow-300 transition-colors" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter fa-2x"></i></a>
+                                <a href="https://www.facebook.com/people/IAExpertos/61576674341650/" class="text-white hover:text-yellow-300 transition-colors" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook fa-2x"></i></a>
                             </div>
                         </div>
                     </div>
@@ -454,28 +611,27 @@
                         <p class="text-base sm:text-lg md:text-xl mb-8 text-gray-200 leading-relaxed">
                             ¿Tienes alguna pregunta o estás listo para comenzar tu proyecto de IA? Completa el formulario y nuestro equipo de expertos se pondrá en contacto contigo.
                         </p>
-                        <form id="contactForm" class="space-y-5 sm:space-y-6">
-                            <div>
-                                <label for="name" class="block text-base sm:text-lg font-semibold mb-1 sm:mb-2 text-gray-100">Nombre Completo</label>
-                                <input type="text" id="name" name="name" class="w-full p-3 form-input" placeholder="Ej: Ada Lovelace" required>
-                            </div>
-                            <div>
-                                <label for="email" class="block text-base sm:text-lg font-semibold mb-1 sm:mb-2 text-gray-100">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" class="w-full p-3 form-input" placeholder="Ej: ada.lovelace@ejemplo.com" required>
-                            </div>
-                            <div>
-                                <label for="subject" class="block text-base sm:text-lg font-semibold mb-1 sm:mb-2 text-gray-100">Asunto</label>
-                                <input type="text" id="subject" name="subject" class="w-full p-3 form-input" placeholder="Ej: Consulta sobre soluciones de IA" required>
-                            </div>
-                            <div>
-                                <label for="message" class="block text-base sm:text-lg font-semibold mb-1 sm:mb-2 text-gray-100">Tu Mensaje</label>
-                                <textarea id="message" name="message" rows="5" class="w-full p-3 form-input" placeholder="Describe brevemente tus necesidades o preguntas..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn-primary w-full py-3 px-6 rounded-full font-bold text-base sm:text-lg shadow-xl uppercase tracking-wider">
-                                <i class="fas fa-paper-plane mr-2"></i> Enviar Mensaje
-                            </button>
-                        </form>
-                        <div id="formMessage" class="mt-4 p-3 rounded-lg text-center hidden"></div>
+                        
+                        <div class="container p-0"> <form target="_blank" action="https://formsubmit.co/info@iaexpertos.org" method="POST">
+                                <div class="form-group"> 
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <input type="text" name="name" class="form-control" placeholder="Nombre Completo" required>
+                                        </div>
+                                        <div class="col">
+                                            <input type="email" name="email" class="form-control" placeholder="Correo Electrónico" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea placeholder="Tu Mensaje" class="form-control" name="message" rows="6" required></textarea>
+                                </div>
+                                <input type="hidden" name="_subject" value="Nuevo contacto desde IAExpertos.org">
+                                <input type="hidden" name="_next" value="https://iaexpertos.org/gracias.html"> <input type="hidden" name="_captcha" value="false"> <button type="submit" class="btn btn-lg btn-dark btn-block">
+                                    <i class="fas fa-paper-plane mr-2"></i> ENVIAR MENSAJE
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -495,95 +651,53 @@
     </footer>
 
     <script>
-        // JavaScript para las partículas en la sección hero
         document.addEventListener('DOMContentLoaded', () => {
             const particlesContainer = document.getElementById('particles');
-            const numberOfParticles = 50;
-
-            for (let i = 0; i < numberOfParticles; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 5 + 2; // Size between 2px and 7px
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                const x = Math.random() * 100; // Random X position (0-100%)
-                const y = Math.random() * 100; // Random Y position (0-100%)
-                particle.style.left = `${x}%`;
-                particle.style.top = `${y}%`;
-                
-                const delay = Math.random() * 5; // Animation delay
-                particle.style.animationDelay = `${delay}s`;
-                
-                const duration = Math.random() * 5 + 5; // Animation duration
-                particle.style.animationDuration = `${duration}s`;
-
-                particlesContainer.appendChild(particle);
+            if (particlesContainer) { // Check if element exists
+                const numberOfParticles = 30;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    const size = Math.random() * 5 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                    particlesContainer.appendChild(particle);
+                }
             }
 
-            // Smooth scroll for navigation links
             document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // Fade-in animation for sections on scroll
-            const faders = document.querySelectorAll('.fade-in');
-            const appearOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -100px 0px"
-            };
-
-            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    } else {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.animation = 'none'; // Remove animation after it plays
-                        appearOnScroll.unobserve(entry.target);
+                    const targetElement = document.querySelector(this.getAttribute('href'));
+                    if (targetElement) { // Check if target element exists
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
                     }
                 });
-            }, appearOptions);
-
-            faders.forEach(fader => {
-                appearOnScroll.observe(fader);
             });
 
-            // Handle form submission
-            const contactForm = document.getElementById('contactForm');
-            const formMessage = document.getElementById('formMessage');
-
-            contactForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                // In a real application, you would send this data to a server
-                // For this example, we'll just show a success message
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const subject = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
-
-                console.log('Formulario enviado:', { name, email, subject, message });
-
-                formMessage.classList.remove('hidden', 'bg-red-500');
-                formMessage.classList.add('bg-green-500', 'text-white');
-                formMessage.textContent = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
-                
-                // Clear the form
-                contactForm.reset();
-
-                // Hide message after a few seconds
-                setTimeout(() => {
-                    formMessage.classList.add('hidden');
-                }, 5000);
-            });
+            const faders = document.querySelectorAll('.fade-in');
+            if (window.IntersectionObserver) { // Check for IntersectionObserver support
+                const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -100px 0px" };
+                const appearOnScroll = new IntersectionObserver(function(entries, appearOnScrollObserver) {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting) return;
+                        entry.target.style.opacity = 1;
+                        entry.target.style.animation = 'none'; // Or keep animation and just add a class like 'is-visible'
+                        appearOnScrollObserver.unobserve(entry.target);
+                    });
+                }, appearOptions);
+                faders.forEach(fader => appearOnScroll.observe(fader));
+            } else { // Fallback for browsers that don't support IntersectionObserver
+                faders.forEach(fader => {
+                    fader.style.opacity = 1; // Make them visible immediately
+                });
+            }
         });
     </script>
+    <p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=miguelamc/iaexpertos" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p>
 </body>
 </html>
