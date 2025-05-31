@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAExpertos.org - Soluciones de IA para tu Empresa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #4158D0 0%, #764BA2 50%, #C850C0 100%);
+      --secondary-gradient: linear-gradient(90deg, #FF6B6B 0%, #FFA500 100%);
+      --text-gradient: linear-gradient(45deg, #FFD700, #FF69B4, #87CEFA);
+      --purple-glow: 0 0 15px rgba(114, 9, 183, 0.4);
+      --blue-glow: 0 0 15px rgba(65, 88, 208, 0.4);
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--primary-gradient);
+      color: #ffffff;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    @media (min-width: 640px) {
+      .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    .header-bg {
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35), var(--purple-glow);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .btn-primary {
+      background: var(--secondary-gradient);
+      transition: all 0.4s ease;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #FFA500 0%, #FF6B6B 100%);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(255, 165, 0, 0.6);
+    }
+    .text-gradient {
+      background: var(--text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1.2s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+    .slide-up {
+      transform: translateY(30px);
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
+    }
+    .slide-up.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .full-cover-section {
+      position: relative;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .full-cover-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0, 0, 30, 0.85), rgba(65, 88, 208, 0.6));
+      z-index: 1;
+    }
+    .full-cover-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .service-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 0.75rem 0.75rem 0 0;
+      transition: transform 0.5s ease;
+      filter: brightness(0.9);
+    }
+    .card:hover .service-image {
+      transform: scale(1.05);
+      filter: brightness(1);
+    }
+    .circular-image {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    .circular-image:hover {
+      transform: scale(1.1);
+      border-color: rgba(255, 215, 0, 0.6);
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), var(--purple-glow);
+    }
+    .footer-bg {
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+    }
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      transition: all 0.3s ease;
+      border-radius: 0.5rem;
+      padding: 14px 18px;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    .form-control:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: #FFD700;
+      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.25), var(--blue-glow);
+      outline: none;
+    }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn-lg {
+      padding: 16px 32px;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+    .btn-dark {
+      background: var(--secondary-gradient);
+      color: white;
+    }
+    .btn-dark:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 165, 0, 0.6);
+    }
+    .btn-block {
+      width: 100%;
+      display: block;
+    }
+    .feature-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .feature-card-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+    .feature-card-content a {
+      margin-top: auto;
+    }
+    .hero-section {
+      position: relative;
+      min-height: 90vh;
+      overflow: hidden;
+      background-image: url('https://img.freepik.com/premium-vector/ai-technology-concept-artificial-intelligence-blue-purple-dots-lines-digital-communication-science-networks_322958-1111.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0, 0, 30, 0.8), rgba(65, 88, 208, 0.6));
+      z-index: 1;
+    }
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: float 10s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.6; }
+      25% { transform: translateY(-30px) translateX(15px) rotate(90deg); opacity: 1; }
+      50% { transform: translateY(-15px) translateX(30px) rotate(180deg); opacity: 0.8; }
+      75% { transform: translateY(30px) translateX(-15px) rotate(270deg); opacity: 1; }
+    }
+    .ai-logo {
+      width: 70px;
+      height: 70px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4158D0 0%, #764BA2 100%);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), var(--purple-glow);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .ai-logo:hover {
+      transform: rotate(15deg) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), var(--blue-glow);
+    }
+    .ai-logo-inner {
+      position: relative;
+      width: 80%;
+      height: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+    }
+    .ai-logo-icon {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    .logo-text {
+      margin-left: 12px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7EEAFD 0%, #4EA8F3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 1.8rem;
+      letter-spacing: 0.5px;
+    }
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: var(--text-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .testimonial-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+      z-index: -1;
+    }
+    .testimonial-card::after {
+      content: '\f10d';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.15);
+    }
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .stat-number {
+        font-size: 2.5rem;
+      }
+      .full-cover-section, .hero-section {
+        background-attachment: scroll;
+      }
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    @media print {
+      .hero-section, .full-cover-section {
+        background-attachment: scroll !important;
+      }
+      .fade-in {
+        opacity: 1 !important;
+        animation: none !important;
+      }
+      .card:hover {
+        transform: none !important;
+      }
+    }
+    #mensaje-exito {
+      color: #a7f3d0;
+      background-color: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-top: 1em;
+      text-align: center;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+    #mensaje-exito.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    /* Chatbot Styles */
+    .chatbot-container {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 1000;
+      font-family: 'Poppins', sans-serif;
+    }
+    .chatbot-toggle {
+      width: 65px;
+      height: 65px;
+      background: linear-gradient(135deg, #4158D0 0%, #C850C0 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), var(--purple-glow);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .chatbot-toggle:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), var(--blue-glow);
+    }
+    .chatbot-toggle i {
+      font-size: 28px;
+      color: white;
+      text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    }
+    .chatbot-window {
+      width: 370px;
+      max-width: 90vw;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), var(--purple-glow);
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      transform: translateY(30px);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+    }
+    .chatbot-window.active {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .chatbot-header {
+      background: linear-gradient(135deg, #4158D0 0%, #C850C0 100%);
+      color: white;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chatbot-header h3 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 18px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    .chatbot-close {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .chatbot-close:hover {
+      transform: rotate(90deg);
+    }
+    .chatbot-messages {
+      flex-grow: 1;
+      padding: 18px;
+      overflow-y: auto;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      margin-bottom: 18px;
+      max-width: 85%;
+      padding: 12px 18px;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.5;
+      position: relative;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      animation: messageAppear 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes messageAppear {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .bot-message {
+      background: linear-gradient(to right, #e9ecef, #dee2e6);
+      color: #333;
+      border-top-left-radius: 5px;
+      align-self: flex-start;
+    }
+    .user-message {
+      background: linear-gradient(135deg, #4158D0 0%, #C850C0 100%);
+      color: white;
+      border-top-right-radius: 5px;
+      margin-left: auto;
+    }
+    .chatbot-input {
+      display: flex;
+      padding: 15px;
+      background: white;
+      border-top: 1px solid #eee;
+    }
+    .chatbot-input input {
+      flex-grow: 1;
+      padding: 12px 18px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      outline: none;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    .chatbot-input input:focus {
+      border-color: #4158D0;
+      box-shadow: 0 0 0 2px rgba(65, 88, 208, 0.2);
+    }
+    .chatbot-input button {
+      background: linear-gradient(135deg, #4158D0 0%, #C850C0 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      margin-left: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    .chatbot-input button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(65, 88, 208, 0.4);
+    }
+    .typing-indicator {
+      display: flex;
+      padding: 10px 15px;
+      background: linear-gradient(to right, #e9ecef, #dee2e6);
+      border-radius: 18px;
+      width: fit-content;
+      margin-bottom: 15px;
+      align-items: center;
+    }
+    .typing-indicator span {
+      height: 8px;
+      width: 8px;
+      background: #6c757d;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 3px;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); background: #adb5bd; }
+      50% { transform: translateY(-5px); background: #6c757d; }
+    }
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .quick-reply {
+      background: white;
+      color: #4158D0;
+      border: 1px solid #4158D0;
+      border-radius: 15px;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    .quick-reply:hover {
+      background: #4158D0;
+      color: white;
+      transform: scale(1.05);
+    }
+    
+    /* Páginas y términos legales */
+    .legal-page {
+      background-color: rgba(255, 255, 255, 0.95);
+      color: #333;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin: 40px auto;
+    }
+    .legal-page h2 {
+      color: #4158D0;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .legal-page h3 {
+      color: #764BA2;
+      margin-top: 25px;
+    }
+    
+    /* Enhanced animations */
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .glow {
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { box-shadow: 0 0 10px rgba(65, 88, 208, 0.3); }
+      to { box-shadow: 0 0 20px rgba(200, 80, 192, 0.6); }
+    }
+    .hover-lift {
+      transition: transform 0.3s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-5px);
+    }
+    
+    /* Floating animated circles */
+    .floating-circles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(65, 88, 208, 0.2), rgba(200, 80, 192, 0.2));
+      backdrop-filter: blur(5px);
+      animation: floatingCircle 15s infinite linear;
+    }
+    @keyframes floatingCircle {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+      25% { transform: translate(50px, -30px) rotate(90deg); opacity: 0.5; }
+      50% { transform: translate(100px, 0) rotate(180deg); opacity: 0.3; }
+      75% { transform: translate(50px, 30px) rotate(270deg); opacity: 0.5; }
+      100% { transform: translate(0, 0) rotate(360deg); opacity: 0.3; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="header-bg py-4 sm:py-5 sticky top-0 z-50 rounded-b-lg shadow-lg">
+    <div class="container flex justify-between items-center">
+      <a href="#" class="flex items-center group">
+        <div class="ai-logo group-hover:rotate-12 transition-transform duration-300">
+          <div class="ai-logo-inner">
+            <div class="ai-logo-icon">AI</div>
+          </div>
+        </div>
+        <span class="text-2xl sm:text-3xl logo-text hidden md:block tracking-wide group-hover:scale-105 transition-transform duration-300">IAExpertos.org</span>
+      </a>
+      <nav class="flex space-x-2 sm:space-x-3 md:space-x-6">
+        <a href="#soluciones" class="text-sm sm:text-base text-white hover:text-yellow-300 transition duration-300 ease-in-out font-semibold px-1 sm:px-2 hover:-translate-y-1 inline-flex items-center">
+          <i class="fas fa-lightbulb mr-1"></i> <span class="border-b border-transparent hover:border-yellow-300">Soluciones</span>
+        </a>
+        <a href="#servicios" class="text-sm sm:text-base text-white hover:text-yellow-300 transition duration-300 ease-in-out font-semibold px-1 sm:px-2 hover:-translate-y-1 inline-flex items-center">
+          <i class="fas fa-cogs mr-1"></i> <span class="border-b border-transparent hover:border-yellow-300">Servicios</span>
+        </a>
+        <a href="#clientes" class="text-sm sm:text-base text-white hover:text-yellow-300 transition duration-300 ease-in-out font-semibold px-1 sm:px-2 hover:-translate-y-1 inline-flex items-center">
+          <i class="fas fa-star mr-1"></i> <span class="border-b border-transparent hover:border-yellow-300">Clientes</span>
+        </a>
+        <a href="#contacto" class="text-sm sm:text-base text-white hover:text-yellow-300 transition duration-300 ease-in-out font-semibold px-1 sm:px-2 hover:-translate-y-1 inline-flex items-center">
+          <i class="fas fa-envelope mr-1"></i> <span class="border-b border-transparent hover:border-yellow-300">Contacto</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section flex items-center justify-center py-20 text-center p-4 sm:p-6">
+      <div class="hero-overlay"></div>
+      <div class="floating-circles" id="floating-circles"></div>
+      <div class="particles" id="particles"></div>
+      <div class="relative z-10 max-w-4xl mx-auto fade-in">
+        <div class="mb-8 flex justify-center">
+          <div class="w-28 h-28 md:w-36 md:h-36 rounded-full bg-blue-500 bg-opacity-30 flex items-center justify-center p-3 glow">
+            <div class="ai-logo pulse" style="width: 100%; height: 100%;">
+              <div class="ai-logo-inner">
+                <div class="ai-logo-icon" style="font-size: 2.8rem;">AI</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 sm:mb-8 text-gradient drop-shadow-xl">
+          Soluciones IA para Potenciar tu Empresa
+        </h1>
+        <p class="text-base xs:text-lg sm:text-xl lg:text-2xl mb-8 sm:mb-10 text-white text-opacity-90 leading-relaxed max-w-3xl mx-auto">
+          Desbloquea el futuro de tu negocio con inteligencia artificial de vanguardia. En IAExpertos.org, somos tu equipo de especialistas en IA, dedicados a ofrecerte soluciones personalizadas que marcan la diferencia.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-5">
+          <a href="#contacto" class="btn-primary inline-block py-3 px-6 sm:py-4 sm:px-12 rounded-full font-bold text-base sm:text-lg md:text-xl shadow-xl uppercase tracking-wider">
+            <i class="fas fa-rocket mr-2"></i> ¿Listo para innovar?
+          </a>
+          <a href="#servicios" class="bg-white bg-opacity-10 hover:bg-opacity-20 inline-block py-3 px-6 sm:py-4 sm:px-12 rounded-full font-bold text-base sm:text-lg md:text-xl shadow-xl uppercase tracking-wider transition-all duration-300 hover:scale-105">
+            <i class="fas fa-search mr-2"></i> Explorar servicios
+          </a>
+        </div>
+        <div class="mt-12 pt-6 flex flex-wrap justify-center gap-5">
+          <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-md rounded-full px-5 py-3 flex items-center hover-lift">
+            <i class="fas fa-shield-alt text-yellow-300 mr-3 text-xl"></i>
+            <span class="text-sm md:text-base">Soluciones certificadas</span>
+          </div>
+          <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-md rounded-full px-5 py-3 flex items-center hover-lift">
+            <i class="fas fa-check-circle text-green-400 mr-3 text-xl"></i>
+            <span class="text-sm md:text-base">Expertos en IA</span>
+          </div>
+          <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-md rounded-full px-5 py-3 flex items-center hover-lift">
+            <i class="fas fa-bolt text-blue-300 mr-3 text-xl"></i>
+            <span class="text-sm md:text-base">Implementación rápida</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-20 px-4 sm:px-6 bg-black bg-opacity-40 fade-in">
+      <div class="container">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="card p-8 rounded-xl">
+            <div class="stat-number mb-3" id="clientCounter">150</div>
+            <div class="text-sm uppercase tracking-wider text-gray-300 font-semibold">Clientes satisfechos</div>
+          </div>
+          <div class="card p-8 rounded-xl">
+            <div class="stat-number mb-3" id="projectCounter">320</div>
+            <div class="text-sm uppercase tracking-wider text-gray-300 font-semibold">Proyectos completados</div>
+          </div>
+          <div class="card p-8 rounded-xl">
+            <div class="stat-number mb-3" id="aiCounter">85</div>
+            <div class="text-sm uppercase tracking-wider text-gray-300 font-semibold">Soluciones IA</div>
+          </div>
+          <div class="card p-8 rounded-xl">
+            <div class="stat-number mb-3" id="teamCounter">25</div>
+            <div class="text-sm uppercase tracking-wider text-gray-300 font-semibold">Expertos en equipo</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="soluciones" class="full-cover-section py-16 md:py-24 px-4 sm:px-6 fade-in" style="background-image: url('https://img.freepik.com/premium-photo/handshake-business-people-purple-tech-background_140916-114.jpg');">
+      <div class="full-cover-overlay"></div>
+      <div class="floating-circles" id="floating-circles-2"></div>
+      <div class="full-cover-content">
+        <div class="container text-center">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-10 sm:mb-14 text-gradient drop-shadow-lg">¿Está tu Empresa Preparada para la Revolución IA?</h2>
+          <div class="grid md:grid-cols-2 gap-10 md:gap-14 mt-10 sm:mt-14">
+            <div class="card p-8 sm:p-10 md:p-12 rounded-2xl shadow-2xl flex flex-col items-center slide-up">
+              <img src="https://miro.medium.com/v2/resize:fit:1400/1*0A24pmaseZbqoC_1ZyATLA.png" alt="Innovación y soluciones IA" class="circular-image mb-7 sm:mb-8 md:mb-9">
+              <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 text-white">Transformamos Desafíos en Soluciones Innovadoras</h3>
+              <p class="text-sm sm:text-base md:text-lg text-gray-100 mb-5 sm:mb-7 leading-relaxed">
+                En IAExpertos.org, convertimos retos en soluciones pioneras con IA avanzada. Descubre cómo nuestros servicios personalizados impulsan tu crecimiento, optimizan operaciones y abren nuevas oportunidades.
+              </p>
+              <p class="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed">
+                Explora nuestro potencial y eleva tu negocio al siguiente nivel revolucionando tu forma de trabajo.
+              </p>
+            </div>
+            <div class="card p-8 sm:p-10 md:p-12 rounded-2xl shadow-2xl flex flex-col items-center slide-up">
+              <img src="https://assets.leantime.io/wp-content/uploads/2023/07/ai-for-business-strategy-use-leantime-scaled.jpeg" alt="Consultoría experta en IA" class="circular-image mb-7 sm:mb-8 md:mb-9">
+              <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 text-white">IA para tu Éxito Empresarial. Expertos a tu Alcance.</h3>
+              <p class="text-sm sm:text-base md:text-lg text-gray-100 mb-5 sm:mb-7 leading-relaxed">
+                Te proporcionamos las soluciones de inteligencia artificial que tu negocio necesita para prosperar. Conócenos y transforma tu futuro con IAExpertos.org.
+              </p>
+              <p class="text-sm sm:text-base md:text-lg text-gray-100 leading-relaxed">
+                ¿Y si la IA pudiera llevar tu empresa más lejos de lo que imaginas? Nosotros hacemos esa visión realidad.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios" class="full-cover-section py-16 md:py-24 px-4 sm:px-6 fade-in" style="background-image: url('https://www.shutterstock.com/image-illustration/neon-gradient-digital-waves-purple-600nw-2510610975.jpg');">
+      <div class="full-cover-overlay"></div>
+      <div class="full-cover-content">
+        <div class="container text-center">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-10 sm:mb-14 text-gradient drop-shadow-lg">Nuestros Servicios Integrales</h2>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-10 sm:mt-14">
+            <div class="card rounded-2xl shadow-xl overflow-hidden feature-card slide-up">
+              <img src="https://waverleysoftware.com/app/cache/images/425x-_b1088a628b1f084bf2e1367f159d6f0cd9f8f43e.png" alt="Estrategia y consultoría IA" class="service-image">
+              <div class="p-7 md:p-9 feature-card-content">
+                <div class="flex justify-center mb-5"><div class="w-18 h-18 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center p-4"><i class="fas fa-chess-queen text-2xl text-purple-300"></i></div></div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 md:mb-5 text-white">Estrategia e Implementación</h3>
+                <p class="text-gray-200 leading-relaxed text-sm md:text-base">Desde la concepción estratégica hasta la implementación completa, te guiamos en cada paso para integrar soluciones de IA personalizadas a tu negocio que transformarán tu productividad.</p>
+                <a href="#contacto" class="mt-5 text-yellow-300 hover:text-yellow-400 transition-colors inline-flex items-center group"><span>Más información</span><i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i></a>
+              </div>
+            </div>
+            <div class="card rounded-2xl shadow-xl overflow-hidden feature-card slide-up">
+              <img src="https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://media.easy-peasy.ai/bdd67cef-57ab-460b-92a0-f9c1c0144d23/49627391-f5a4-496f-a89c-b389bdb23a84.png" alt="Formación en inteligencia artificial" class="service-image">
+              <div class="p-7 md:p-9 feature-card-content">
+                <div class="flex justify-center mb-5"><div class="w-18 h-18 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center p-4"><i class="fas fa-graduation-cap text-2xl text-blue-300"></i></div></div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 md:mb-5 text-white">Formación y Capacitación</h3>
+                <p class="text-gray-200 leading-relaxed text-sm md:text-base">Capacitamos a tu equipo con cursos diseñados para empoderar a tu organización desde dentro y maximizar el potencial de las tecnologías IA. Formación a medida para todos los niveles.</p>
+                <a href="#contacto" class="mt-5 text-yellow-300 hover:text-yellow-400 transition-colors inline-flex items-center group"><span>Más información</span><i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i></a>
+              </div>
+            </div>
+            <div class="card rounded-2xl shadow-xl overflow-hidden feature-card slide-up">
+              <img src="https://www.corporatevision-news.com/wp-content/uploads/2024/05/AI-chatbot.jpg" alt="Soporte técnico IA" class="service-image">
+              <div class="p-7 md:p-9 feature-card-content">
+                <div class="flex justify-center mb-5"><div class="w-18 h-18 rounded-full bg-green-500 bg-opacity-20 flex items-center justify-center p-4"><i class="fas fa-headset text-2xl text-green-300"></i></div></div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 md:mb-5 text-white">Soporte y Asistencia</h3>
+                <p class="text-gray-200 leading-relaxed text-sm md:text-base">Te acompañamos con soporte técnico continuo y asistencia personalizada para asegurar tu éxito en la implementación de soluciones basadas en IA. Servicio premium 24/7.</p>
+                <a href="#contacto" class="mt-5 text-yellow-300 hover:text-yellow-400 transition-colors inline-flex items-center group"><span>Más información</span><i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="clientes" class="py-16 md:py-24 px-4 sm:px-6 bg-gradient-to-l from-purple-900 via-indigo-900 to-purple-800 fade-in">
+      <div class="container">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-12 sm:mb-16 text-center text-gradient drop-shadow-lg">Lo que dicen nuestros clientes</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="card p-8 rounded-xl testimonial-card slide-up">
+            <div class="flex items-center mb-5">
+              <img src="https://as2.ftcdn.net/jpg/07/89/90/75/1000_F_789907502_i56We5Jun2HGH2kHIHKwOM6HcAPYK8NY.jpg" alt="Cliente satisfecho María García" class="w-14 h-14 rounded-full mr-4 object-cover border-2 border-purple-300">
+              <div>
+                <h4 class="font-bold text-white text-lg">María García</h4>
+                <p class="text-sm text-gray-300">CEO, TechSolutions</p>
+              </div>
+            </div>
+            <p class="text-gray-200 italic leading-relaxed">"IAExpertos transformó completamente nuestra forma de trabajar. Sus soluciones de IA nos permitieron automatizar procesos complejos y aumentar nuestra productividad en un 40%. Su equipo es excepcional."</p>
+            <div class="mt-5 flex">
+              <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+            </div>
+          </div>
+          <div class="card p-8 rounded-xl testimonial-card slide-up">
+            <div class="flex items-center mb-5">
+              <img src="https://thumbs.dreamstime.com/b/business-professionals-discuss-project-exchange-ideas-review-paperwork-modern-office-diverse-team-members-share-359431763.jpg" alt="Cliente satisfecho Carlos Martínez" class="w-14 h-14 rounded-full mr-4 object-cover border-2 border-purple-300">
+              <div>
+                <h4 class="font-bold text-white text-lg">Carlos Martínez</h4>
+                <p class="text-sm text-gray-300">Director, Innovatech</p>
+              </div>
+            </div>
+            <p class="text-gray-200 italic leading-relaxed">"El equipo de IAExpertos es excepcional. Entendieron nuestras necesidades específicas y desarrollaron una solución personalizada que superó todas nuestras expectativas. Los recomiendo sin dudarlo."</p>
+            <div class="mt-5 flex">
+              <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+            </div>
+          </div>
+          <div class="card p-8 rounded-xl testimonial-card slide-up">
+            <div class="flex items-center mb-5">
+              <img src="https://www.myhcg.com/wp-content/uploads/2019/10/bigstock-Smiling-Professional-Business-288784315.jpg" alt="Cliente satisfecho Laura Fernández" class="w-14 h-14 rounded-full mr-4 object-cover border-2 border-purple-300">
+              <div>
+                <h4 class="font-bold text-white text-lg">Laura Fernández</h4>
+                <p class="text-sm text-gray-300">Directora de Marketing, DigitalPlus</p>
+              </div>
+            </div>
+            <p class="text-gray-200 italic leading-relaxed">"Gracias a las soluciones de IAExpertos, hemos podido ofrecer experiencias personalizadas a nuestros clientes, lo que ha incrementado nuestra tasa de conversión en un 35%. Su enfoque innovador marca la diferencia."</p>
+            <div class="mt-5 flex">
+              <i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star-half-alt text-yellow-400"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 px-4 sm:px-6 bg-gradient-to-l from-purple-900 via-indigo-900 to-purple-800 text-center fade-in">
+      <div class="container">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-10 md:mb-14 text-gradient drop-shadow-lg">¿Listo para Liderar la Revolución IA?</h2>
+        <div class="grid md:grid-cols-2 gap-10 items-center mb-14">
+          <div class="slide-up">
+            <img src="https://img.freepik.com/premium-vector/ai-technology-concept-artificial-intelligence-blue-purple-dots-lines-digital-communication-science-networks_322958-3322.jpg" alt="Futuro de la inteligencia artificial en negocios" class="rounded-lg shadow-lg w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+          </div>
+          <div class="text-left slide-up">
+            <h3 class="text-2xl font-bold mb-5 text-white">Beneficios de nuestras soluciones</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start bg-white bg-opacity-5 p-4 rounded-lg"><i class="fas fa-check-circle text-green-400 mt-1 mr-3 text-xl"></i><span class="text-base md:text-lg">Transformamos desafíos complejos en oportunidades de negocio innovadoras</span></li>
+              <li class="flex items-start bg-white bg-opacity-5 p-4 rounded-lg"><i class="fas fa-check-circle text-green-400 mt-1 mr-3 text-xl"></i><span class="text-base md:text-lg">Optimizamos procesos para mejorar la eficiencia operativa y reducir costos</span></li>
+              <li class="flex items-start bg-white bg-opacity-5 p-4 rounded-lg"><i class="fas fa-check-circle text-green-400 mt-1 mr-3 text-xl"></i><span class="text-base md:text-lg">Impulsamos el crecimiento y la competitividad de tu empresa en mercados globales</span></li>
+              <li class="flex items-start bg-white bg-opacity-5 p-4 rounded-lg"><i class="fas fa-check-circle text-green-400 mt-1 mr-3 text-xl"></i><span class="text-base md:text-lg">Desbloqueamos nuevos horizontes con la innovación tecnológica de vanguardia</span></li>
+            </ul>
+          </div>
+        </div>
+        <a href="#contacto" class="btn-primary inline-block py-4 px-10 sm:py-5 sm:px-14 rounded-full font-bold text-lg md:text-xl shadow-xl uppercase tracking-wider hover:scale-105 transition-transform">
+          <i class="fas fa-comments mr-3"></i> Contáctanos Ahora
+        </a>
+      </div>
+    </section>
+
+    <section id="contacto" class="py-16 md:py-24 px-4 sm:px-6 bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-800 fade-in">
+      <div class="container text-center">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-10 sm:mb-14 text-gradient drop-shadow-lg">Ponte en Contacto</h2>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="slide-up">
+            <img src="https://cdn.vectorstock.com/i/1000v/37/72/artificial-intelligence-concept-blue-purple-vector-28033772.jpg" alt="Formulario de contacto con fondo tecnológico" class="rounded-lg shadow-2xl mb-8 w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-300">
+            <div class="text-left bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm border border-white border-opacity-20">
+              <h3 class="text-xl font-bold mb-5 text-white">Información de contacto</h3>
+              <div class="space-y-4">
+                <p class="flex items-center"><i class="fas fa-envelope w-8 text-yellow-300 text-xl"></i><span>info@iaexpertos.org</span></p>
+                <p class="flex items-center"><i class="fas fa-phone w-8 text-yellow-300 text-xl"></i><span>+34 668 626 500</span></p>
+                <p class="flex items-center"><i class="fas fa-map-marker-alt w-8 text-yellow-300 text-xl"></i><span>Calle José Tamayo, 8 - 18008 Granada</span></p>
+                <p class="flex items-center"><i class="fas fa-clock w-8 text-yellow-300 text-xl"></i><span>Lunes a Viernes: 9:00 - 18:00</span></p>
+              </div>
+              <div class="flex space-x-6 mt-8">
+                <a href="https://www.linkedin.com/in/iaexpertos-org-066074369" class="text-white hover:text-yellow-300 transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="https://twitter.com/iaexpertos" class="text-white hover:text-yellow-300 transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="https://www.facebook.com/people/IAExpertos/61576674341650/" class="text-white hover:text-yellow-300 transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="https://instagram.com/iaexpertos" class="text-white hover:text-yellow-300 transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram fa-2x"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="text-left slide-up">
+            <p class="text-base sm:text-lg md:text-xl mb-8 text-gray-200 leading-relaxed">
+              ¿Tienes alguna pregunta o estás listo para comenzar tu proyecto de IA? Completa el formulario y nuestro equipo de expertos se pondrá en contacto contigo en menos de 24 horas.
+            </p>
+            <div class="container p-0">
+              <form id="formulario-contacto" action="https://formsubmit.co/info@iaexpertos.org" method="POST">
+                <input type="hidden" name="_redirect" value="false">
+                <input type="hidden" name="_captcha" value="false">
+                <div class="mb-5">
+                  <label for="nombre" class="block text-sm font-medium text-gray-300 mb-2">Nombre completo</label>
+                  <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required class="form-control">
+                </div>
+                <div class="mb-5">
+                  <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Correo electrónico</label>
+                  <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required class="form-control">
+                </div>
+                <div class="mb-5">
+                  <label for="telefono" class="block text-sm font-medium text-gray-300 mb-2">Teléfono (opcional)</label>
+                  <input type="tel" id="telefono" name="telefono" placeholder="Tu número de teléfono" class="form-control">
+                </div>
+                <div class="mb-6">
+                  <label for="mensaje" class="block text-sm font-medium text-gray-300 mb-2">Tu mensaje</label>
+                  <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto o necesidades" rows="6" required class="form-control"></textarea>
+                </div>
+                <input type="hidden" name="_subject" value="Nuevo contacto desde IAExpertos.org">
+                <button type="submit" class="btn btn-lg btn-dark btn-block hover:scale-[1.02] transition-transform">
+                  <i class="fas fa-paper-plane mr-2"></i> ENVIAR MENSAJE
+                </button>
+              </form>
+              <div id="mensaje-exito" style="display:none;">
+                <i class="fas fa-check-circle text-green-400 text-xl mr-2"></i> Gracias por ponerte en contacto con nosotros. En breve alguien de nuestro equipo se pondrá en contacto contigo.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-bg py-10 mt-16 rounded-t-lg shadow-inner">
+    <div class="container text-center text-gray-300 text-sm">
+      <div class="flex justify-center items-center mb-6">
+        <div class="ai-logo w-14 h-14">
+          <div class="ai-logo-inner">
+            <div class="ai-logo-icon" style="font-size: 1.2rem;">AI</div>
+          </div>
+        </div>
+        <span class="text-xl logo-text ml-3">IAExpertos.org</span>
+      </div>
+      <p>© 2025 IAExpertos.org. Todos los derechos reservados.</p>
+      <p class="mt-2">Diseñado con <i class="fas fa-heart text-red-500 mx-1 pulse"></i> para el futuro de tu empresa.</p>
+      <div class="flex justify-center space-x-6 mt-6">
+        <a href="privacidad.html" class="hover:text-yellow-300 transition-colors text-base">Política de Privacidad</a>
+        <span class="text-gray-500">|</span>
+        <a href="terminos.html" class="hover:text-yellow-300 transition-colors text-base">Términos de Servicio</a>
+        <span class="text-gray-500">|</span>
+        <a href="cookies.html" class="hover:text-yellow-300 transition-colors text-base">Política de Cookies</a>
+      </div>
+      <div class="flex justify-center space-x-6 mt-8">
+        <a href="https://www.linkedin.com/in/iaexpertos-org-066074369" class="text-gray-400 hover:text-white transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin fa-lg"></i></a>
+        <a href="https://twitter.com/iaexpertos" class="text-gray-400 hover:text-white transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter fa-lg"></i></a>
+        <a href="https://www.facebook.com/people/IAExpertos/61576674341650/" class="text-gray-400 hover:text-white transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook fa-lg"></i></a>
+        <a href="https://instagram.com/iaexpertos" class="text-gray-400 hover:text-white transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="https://github.com/iaexpertos" class="text-gray-400 hover:text-white transition-colors hover:scale-110 transition-transform" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-lg"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot -->
+  <div class="chatbot-container">
+    <div class="chatbot-toggle" id="chatbotToggle">
+      <i class="fas fa-robot"></i>
+    </div>
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chatbot-header">
+        <h3><i class="fas fa-robot mr-2"></i> Asistente IAExpertos</h3>
+        <button class="chatbot-close" id="chatbotClose">&times;</button>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="message bot-message">
+          ¡Hola! Soy el asistente virtual de IAExpertos. ¿En qué puedo ayudarte hoy?
+          <div class="quick-replies">
+            <button class="quick-reply" data-message="¿Qué servicios ofrecen?">¿Qué servicios ofrecen?</button>
+            <button class="quick-reply" data-message="¿Cómo puedo contactarlos?">¿Cómo puedo contactarlos?</button>
+            <button class="quick-reply" data-message="¿Tienen precios?">¿Tienen precios?</button>
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="chatbotInput" placeholder="Escribe tu mensaje...">
+        <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Scroll animation observer
+      const scrollElements = document.querySelectorAll('.slide-up');
+      
+      const elementInView = (el, scrollOffset = 0) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+          elementTop <= (window.innerHeight || document.documentElement.clientHeight) * (1 - scrollOffset)
+        );
+      };
+      
+      const displayScrollElement = (element) => {
+        element.classList.add('active');
+      };
+      
+      const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+          if (elementInView(el, 0.2)) {
+            displayScrollElement(el);
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', () => {
+        handleScrollAnimation();
+      });
+      
+      // Initialize the first check
+      handleScrollAnimation();
+      
+      // Floating circles animation
+      const addFloatingCircles = (containerId, count) => {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        for (let i = 0; i < count; i++) {
+          const circle = document.createElement('div');
+          circle.classList.add('circle');
+          
+          // Random size between 50px and 200px
+          const size = Math.random() * 150 + 50;
+          circle.style.width = `${size}px`;
+          circle.style.height = `${size}px`;
+          
+          // Random position
+          circle.style.left = `${Math.random() * 100}%`;
+          circle.style.top = `${Math.random() * 100}%`;
+          
+          // Random animation delay
+          circle.style.animationDelay = `${Math.random() * 10}s`;
+          
+          // Random animation duration between 10s and 30s
+          circle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+          
+          // Random opacity
+          circle.style.opacity = Math.random() * 0.2 + 0.1;
+          
+          container.appendChild(circle);
+        }
+      };
+      
+      // Add floating circles to sections
+      addFloatingCircles('floating-circles', 8);
+      addFloatingCircles('floating-circles-2', 6);
+
+      // Particle animation
+      const particlesContainer = document.getElementById('particles');
+      if (particlesContainer) {
+        const numberOfParticles = 40;
+        for (let i = 0; i < numberOfParticles; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          const size = Math.random() * 6 + 2;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
+          particle.style.animationDelay = `${Math.random() * 5}s`;
+          particle.style.animationDuration = `${Math.random() * 7 + 5}s`;
+          
+          // Add glow effect
+          const glowColor = Math.random() > 0.5 ? 'rgba(65, 88, 208, 0.7)' : 'rgba(200, 80, 192, 0.7)';
+          particle.style.boxShadow = `0 0 ${Math.random() * 5 + 3}px ${glowColor}`;
+          
+          particlesContainer.appendChild(particle);
+        }
+      }
+
+      // Smooth scrolling for navigation
+      document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetElement = document.querySelector(this.getAttribute('href'));
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Counter animation
+      function animateCounter(element, target, duration = 2000) {
+        const start = 0;
+        const increment = target / (duration / 16);
+        let current = start;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            clearInterval(timer);
+            current = target;
+          }
+          element.textContent = Math.floor(current);
+        }, 16);
+      }
+
+      const clientCounter = document.getElementById('clientCounter');
+      const projectCounter = document.getElementById('projectCounter');
+      const aiCounter = document.getElementById('aiCounter');
+      const teamCounter = document.getElementById('teamCounter');
+
+      // Initialize counters when they come into view
+      const initializeCounter = (element, targetValue) => {
+        if (!element) return;
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animateCounter(element, targetValue);
+              observer.unobserve(element);
+            }
+          });
+        }, { threshold: 0.5 });
+        
+        observer.observe(element);
+      };
+
+      initializeCounter(clientCounter, 150);
+      initializeCounter(projectCounter, 320);
+      initializeCounter(aiCounter, 85);
+      initializeCounter(teamCounter, 25);
+
+      // Contact form submission
+      const formularioContacto = document.getElementById('formulario-contacto');
+      const mensajeExito = document.getElementById('mensaje-exito');
+      
+      if(formularioContacto) {
+        formularioContacto.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const datos = new FormData(formularioContacto);
+          fetch(formularioContacto.action, {
+            method: 'POST',
+            body: datos,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+          .then(respuesta => {
+            if (respuesta.ok) {
+              formularioContacto.reset();
+              if(mensajeExito) {
+                mensajeExito.style.display = 'block';
+                setTimeout(() => {
+                  mensajeExito.classList.add('show');
+                }, 100);
+                setTimeout(() => {
+                  mensajeExito.classList.remove('show');
+                  setTimeout(() => {
+                    mensajeExito.style.display = 'none';
+                  }, 500);
+                }, 5000);
+              }
+            } else {
+              respuesta.json().then(data => {
+                alert(data.error || "Ocurrió un error al enviar el formulario. Inténtalo más tarde.");
+              }).catch(() => {
+                alert("Ocurrió un error al enviar el formulario. Inténtalo más tarde.");
+              });
+            }
+          })
+          .catch(error => {
+            console.error('Error en la solicitud fetch:', error);
+            alert("Ocurrió un error de red al enviar el formulario.");
+          });
+        });
+      }
+
+      // Chatbot functionality
+      const chatbotToggle = document.getElementById('chatbotToggle');
+      const chatbotWindow = document.getElementById('chatbotWindow');
+      const chatbotClose = document.getElementById('chatbotClose');
+      const chatbotMessages = document.getElementById('chatbotMessages');
+      const chatbotInput = document.getElementById('chatbotInput');
+      const chatbotSend = document.getElementById('chatbotSend');
+      const quickReplies = document.querySelectorAll('.quick-reply');
+
+      let isChatbotOpen = false;
+
+      // Toggle chatbot window
+      chatbotToggle.addEventListener('click', () => {
+        isChatbotOpen = !isChatbotOpen;
+        if (isChatbotOpen) {
+          chatbotWindow.classList.add('active');
+        } else {
+          chatbotWindow.classList.remove('active');
+        }
+      });
+
+      // Close chatbot
+      chatbotClose.addEventListener('click', () => {
+        isChatbotOpen = false;
+        chatbotWindow.classList.remove('active');
+      });
+
+      // Send message
+      function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (message === '') return;
+
+        // Add user message
+        addMessage(message, 'user');
+        chatbotInput.value = '';
+
+        // Show typing indicator
+        const typingIndicator = document.createElement('div');
+        typingIndicator.className = 'typing-indicator';
+        typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+        chatbotMessages.appendChild(typingIndicator);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+        // Simulate bot response after delay
+        setTimeout(() => {
+          // Remove typing indicator
+          chatbotMessages.removeChild(typingIndicator);
+          
+          // Add bot response
+          const botResponse = getBotResponse(message);
+          addMessage(botResponse.text, 'bot', botResponse.quickReplies);
+        }, 1000 + Math.random() * 2000);
+      }
+
+      // Add message to chat
+      function addMessage(text, sender, quickReplies = null) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        messageDiv.textContent = text;
+        
+        if (quickReplies) {
+          const repliesDiv = document.createElement('div');
+          repliesDiv.className = 'quick-replies';
+          
+          quickReplies.forEach(reply => {
+            const button = document.createElement('button');
+            button.className = 'quick-reply';
+            button.textContent = reply.text;
+            button.dataset.message = reply.text;
+            button.addEventListener('click', () => {
+              addMessage(reply.text, 'user');
+              setTimeout(() => {
+                const response = getBotResponse(reply.text);
+                addMessage(response.text, 'bot', response.quickReplies);
+              }, 1000);
+            });
+            repliesDiv.appendChild(button);
+          });
+          
+          messageDiv.appendChild(repliesDiv);
+        }
+        
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      // Get bot response
+      function getBotResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        if (lowerMessage.includes('servicio') || lowerMessage.includes('ofrecen')) {
+          return {
+            text: "Ofrecemos servicios integrales de IA, incluyendo:\n\n✓ Estrategia e implementación\n✓ Formación y capacitación\n✓ Soporte y asistencia\n\n¿Te gustaría más información sobre alguno en particular?",
+            quickReplies: [
+              { text: "Estrategia e implementación" },
+              { text: "Formación y capacitación" },
+              { text: "Soporte y asistencia" }
+            ]
+          };
+        } else if (lowerMessage.includes('contact') || lowerMessage.includes('hablar')) {
+          return {
+            text: "Puedes contactarnos a través de:\n\n📧 info@iaexpertos.org\n📞 +34 668 626 500\n📍 Calle José Tamayo, 8 - 18008 Granada\n\nTambién puedes completar el formulario en nuestra página de contacto o solicitar una llamada ahora.",
+            quickReplies: [
+              { text: "¿Cuál es su horario?" },
+              { text: "¿Tienen oficina física?" },
+              { text: "Solicitar llamada" }
+            ]
+          };
+        } else if (lowerMessage.includes('precio') || lowerMessage.includes('cuesta') || lowerMessage.includes('tarifa')) {
+          return {
+            text: "Nuestros precios varían según el proyecto y las necesidades específicas de cada cliente. Para ofrecerte una cotización precisa, necesitamos entender mejor tus requerimientos. ¿Podrías contarme más sobre lo que necesitas o preferirías hablar con un asesor?",
+            quickReplies: [
+              { text: "Necesito una solución personalizada" },
+              { text: "Quiero información sobre formación" },
+              { text: "Hablar con un asesor" }
+            ]
+          };
+        } else if (lowerMessage.includes('hola') || lowerMessage.includes('buenas')) {
+          return {
+            text: "¡Hola! ¡Es un placer saludarte! ¿En qué puedo ayudarte hoy con respecto a nuestros servicios de inteligencia artificial?",
+            quickReplies: [
+              { text: "Quiero saber sobre sus proyectos" },
+              { text: "¿Cómo empezar con IA?" },
+              { text: "Ver casos de éxito" }
+            ]
+          };
+        } else if (lowerMessage.includes('implementación') || lowerMessage.includes('estrategia')) {
+          return {
+            text: "Nuestro servicio de estrategia e implementación incluye:\n\n1️⃣ Análisis de necesidades y diagnóstico\n2️⃣ Diseño de solución personalizada\n3️⃣ Desarrollo e implementación escalable\n4️⃣ Seguimiento y optimización continua\n\n¿Te gustaría agendar una consulta con nuestros expertos para discutir tu proyecto específico?",
+            quickReplies: [
+              { text: "Sí, quiero una consulta" },
+              { text: "Más información primero" },
+              { text: "Ver ejemplos de proyectos" }
+            ]
+          };
+        } else if (lowerMessage.includes('formación') || lowerMessage.includes('capacitación')) {
+          return {
+            text: "Ofrecemos programas de formación adaptados a diferentes niveles y necesidades:\n\n🔹 Introducción a la IA para equipos directivos\n🔹 IA para negocios y estrategia empresarial\n🔹 Cursos técnicos avanzados para equipos de desarrollo\n🔹 Programas personalizados para tu organización\n\n¿Qué tipo de formación te interesa?",
+            quickReplies: [
+              { text: "Introducción a la IA" },
+              { text: "Cursos técnicos" },
+              { text: "Formación personalizada" }
+            ]
+          };
+        } else if (lowerMessage.includes('soporte') || lowerMessage.includes('asistencia') || lowerMessage.includes('ayuda')) {
+          return {
+            text: "Nuestro servicio de soporte y asistencia técnica incluye:\n\n🔧 Servicio premium 24/7 para soluciones críticas\n🔧 Resolución de incidencias por especialistas\n🔧 Actualizaciones y mejoras continuas\n🔧 Asesoramiento técnico personalizado\n\n¿Necesitas soporte para una implementación existente o estás considerando una nueva solución?",
+            quickReplies: [
+              { text: "Soporte para implementación existente" },
+              { text: "Nueva solución con soporte" },
+              { text: "Planes de soporte disponibles" }
+            ]
+          };
+        } else if (lowerMessage.includes('horario')) {
+          return {
+            text: "Nuestro horario de atención al cliente es:\n\n📅 Lunes a Viernes\n🕘 9:00 - 18:00 (Horario peninsular español)\n\nPara asistencia técnica urgente, disponemos de soporte 24/7 para clientes con contrato premium.",
+            quickReplies: [
+              { text: "¿Qué es el soporte premium?" },
+              { text: "Contactar ahora" }
+            ]
+          };
+        } else if (lowerMessage.includes('oficina') || lowerMessage.includes('física') || lowerMessage.includes('presencial')) {
+          return {
+            text: "Sí, contamos con oficinas físicas en:\n\n📍 Central: Calle José Tamayo, 8 - 18008 Granada, España\n\nTambién disponemos de delegaciones en Madrid y Barcelona para reuniones presenciales. ¿Prefieres una visita presencial o una reunión virtual?",
+            quickReplies: [
+              { text: "Prefiero reunión presencial" },
+              { text: "Prefiero reunión virtual" }
+            ]
+          };
+        } else if (lowerMessage.includes('llamada')) {
+          return {
+            text: "Estaremos encantados de llamarte. Para programar una llamada con uno de nuestros especialistas, necesitamos algunos datos:\n\n1. Nombre completo\n2. Número de teléfono\n3. Mejor horario para contactarte\n4. Tema a tratar\n\n¿Prefieres proporcionarnos estos datos por este chat o a través del formulario de contacto?",
+            quickReplies: [
+              { text: "Usar formulario de contacto" },
+              { text: "Proporcionar datos por chat" }
+            ]
+          };
+        } else if (lowerMessage.includes('proyecto') || lowerMessage.includes('caso') || lowerMessage.includes('éxito')) {
+          return {
+            text: "Hemos desarrollado proyectos de IA exitosos en diversos sectores:\n\n🏆 Sistema de predicción de demanda para cadena minorista (+25% precisión)\n🏆 Automatización de atención al cliente para compañía de seguros (ROI 300%)\n🏆 Análisis predictivo para mantenimiento industrial (reducción 40% costes)\n\n¿En qué sector te gustaría ver ejemplos específicos?",
+            quickReplies: [
+              { text: "Retail y comercio" },
+              { text: "Finanzas y seguros" },
+              { text: "Industria y fabricación" },
+              { text: "Salud y bienestar" }
+            ]
+          };
+        } else if (lowerMessage.includes('empezar con ia')) {
+          return {
+            text: "Para comenzar con la IA en tu empresa, recomendamos este enfoque:\n\n1️⃣ Diagnóstico inicial: Evaluamos tus necesidades y oportunidades\n2️⃣ Workshop estratégico: Definimos objetivos y casos de uso\n3️⃣ MVP y prueba de concepto: Implementación inicial controlada\n4️⃣ Escalado progresivo: Ampliación basada en resultados\n\n¿Te gustaría programar una reunión de diagnóstico inicial sin compromiso?",
+            quickReplies: [
+              { text: "Sí, quiero un diagnóstico inicial" },
+              { text: "Enviar información por email" }
+            ]
+          };
+        } else {
+          return {
+            text: "Gracias por tu mensaje. Para darte la mejor respuesta personalizada, voy a redirigir tu consulta a nuestro equipo de expertos. Mientras tanto, ¿hay algo específico sobre nuestras soluciones de IA en lo que pueda orientarte?",
+            quickReplies: [
+              { text: "Ver soluciones para empresas" },
+              { text: "Solicitar llamada de un experto" },
+              { text: "No, gracias" }
+            ]
+          };
+        }
+      }
+
+      // Event listeners for chat
+      chatbotSend.addEventListener('click', sendMessage);
+      chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+
+      quickReplies.forEach(reply => {
+        reply.addEventListener('click', () => {
+          const message = reply.dataset.message;
+          addMessage(message, 'user');
+          
+          setTimeout(() => {
+            const response = getBotResponse(message);
+            addMessage(response.text, 'bot', response.quickReplies);
+          }, 1000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
